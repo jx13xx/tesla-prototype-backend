@@ -14,12 +14,11 @@ public class CarInterior {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "interior_id")
-    private Long interio_id;
+    private Long id;
 
 
     private String description;
     private Boolean option_included;
-    private String price;
-    private String spec_value;
+    private Integer price;
+
 }

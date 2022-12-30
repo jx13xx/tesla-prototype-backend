@@ -25,5 +25,5 @@ public class Cost {
     private String currency;
 
     @Column(name = "price")
-    private String price;
+    private Integer price;
 }

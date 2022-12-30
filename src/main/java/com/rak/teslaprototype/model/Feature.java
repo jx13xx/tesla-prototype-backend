@@ -17,5 +17,5 @@ public class Feature {
     private Long id;
 
     private String Feature;
-    private String Price;
+    private Integer Price;
 }

@@ -20,6 +20,7 @@ public class Car {
     private Long id;
 
     private String modelName;
+    private Integer price;
 
     @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
