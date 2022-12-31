@@ -17,11 +17,6 @@ public class Meta {
     @Column(name ="car_id")
     private Long id;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "car_id")
-    private Car car;
-
     @Column(name = "imageUrl")
     private String imageUrl;
 
