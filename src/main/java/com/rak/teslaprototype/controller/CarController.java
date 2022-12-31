@@ -6,51 +6,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 
-@RestController()
+@RestController
 @RequestMapping("api/v1/car")
 @Slf4j
 public class CarController {
 
-    private final CarServiceAPI api;
+    public final CarServiceAPI api;
 
 
     public CarController(CarServiceAPI carServiceAPI) {
         this.api = carServiceAPI;
     }
 
-    @GetMapping("")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> getAll()  {
         log.info("Retrieving all cars");
         return new ResponseEntity<>(api.getAllCars(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/features")
+    @RequestMapping(value = "/{id}/features", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> getFeatures(@PathVariable String id) {
         log.info("Retrieving car feature options");
         return new ResponseEntity<>(api.getFeatures(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/interior")
+    @RequestMapping(value = "/{id}/interior", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> getInterior(@PathVariable String id){
         log.info("Retrieving car interior options");
         return new ResponseEntity<>(api.getInterior(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/exterior")
+    @RequestMapping(value = "/{id}/exterior", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> getExterior(@PathVariable String id){
         log.info("Retrieving car exterior options");
         return new ResponseEntity<>(api.getExterior(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/autopilot")
+    @RequestMapping(value = "/{id}/autopilot", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> getAutoPilot(@PathVariable String id){
         log.info("Retrieving car autopilot options");
         return new ResponseEntity<>(api.getAutoPilotSpecs(id), HttpStatus.OK);
