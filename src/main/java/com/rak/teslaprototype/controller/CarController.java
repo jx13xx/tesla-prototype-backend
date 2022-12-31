@@ -14,19 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 
-@RestController()
+@RestController
 @RequestMapping("api/v1/car")
 @Slf4j
 public class CarController {
 
-    private final CarServiceAPI api;
+    public final CarServiceAPI api;
 
 
     public CarController(CarServiceAPI carServiceAPI) {
         this.api = carServiceAPI;
     }
 
-    @GetMapping("")
+    @GetMapping("/some")
     public ResponseEntity<Map<String, Object>> getAll()  {
         log.info("Retrieving all cars");
         return new ResponseEntity<>(api.getAllCars(), HttpStatus.OK);
