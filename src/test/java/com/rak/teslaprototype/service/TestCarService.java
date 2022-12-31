@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @RunWith(MockitoJUnitRunner.class)
-public class CarServiceTest {
+public class TestCarService {
 
     List<Car> cars = new ArrayList<>();
     Car car1 = new CarBuilder().build();
@@ -151,5 +151,5 @@ public class CarServiceTest {
         var serviceMethod = carService.getAutoPilotSpecs(String.valueOf(carId));
         assert serviceMethod == null;
     }
-    
+
 }
