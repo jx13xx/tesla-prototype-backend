@@ -1,5 +1,6 @@
 package com.rak.teslaprototype.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,31 +21,37 @@ public class Car {
     private Long id;
 
     private String modelName;
+
+    @JsonIgnore
     private Integer price;
 
-    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Cost cost;
 
-    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Meta meta;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
-    private List<Feature> features = new ArrayList<>();
+    @JsonIgnore
+    public List<Feature> features = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
+    @JsonIgnore
     private List<CarInterior> interiors = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
+    @JsonIgnore
     private List<Color> colors = new ArrayList<>();
 
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
+    @JsonIgnore
     private List<AutoPilot> autoPilots = new ArrayList<>();
 
 }

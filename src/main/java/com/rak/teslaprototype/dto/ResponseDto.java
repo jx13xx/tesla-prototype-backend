@@ -1,11 +1,14 @@
 package com.rak.teslaprototype.dto;
 
+
 import java.util.HashMap;
+import java.util.Map;
 
-public class ResponseDtoImpl   {
+public class ResponseDto {
 
-    public Object convertToResponse (Object response){
-        HashMap<Object, Object> convertedResponse = new HashMap<>();
-        return convertedResponse.put("data", response);
+    public Map<String, Object> convertToResponse (Object response){
+        Map<String, Object> cp = new HashMap<>();
+        cp.put("data", response);
+        return  cp;
     }
 }
