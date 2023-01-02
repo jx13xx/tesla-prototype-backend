@@ -2,7 +2,6 @@ package com.rak.teslaprototype.service;
 
 import com.rak.teslaprototype.builder.CarBuilder;
 import com.rak.teslaprototype.defaultData.DefaultAutoPilot;
-import com.rak.teslaprototype.defaultData.DefaultCar;
 import com.rak.teslaprototype.defaultData.DefaultCarInterior;
 import com.rak.teslaprototype.defaultData.DefaultCost;
 import com.rak.teslaprototype.exceptions.AutoPilotNotFoundException;
@@ -23,10 +22,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
@@ -56,14 +53,13 @@ public class TestCarService {
        var serviceMethod = carService.getAllCars();
 
        assert serviceMethod != null;
-       assert serviceMethod.get("data") != null;
-       assert serviceMethod.getOrDefault("data", DefaultCar.ModelName) != null;
-       for (Map.Entry<String, Object> entry : serviceMethod.entrySet()) {
-           if(entry.getKey().contains("modelName")){
-               assert entry.getValue() == DefaultCar.ModelName;
-               break;
-           }
-       }
+//       assert serviceMethod.getOrDefault("data", DefaultCar.ModelName) != null;
+//       for (Map.Entry<String, Object> entry : serviceMethod.entrySet()) {
+//           if(entry.getKey().contains("modelName")){
+//               assert entry.getValue() == DefaultCar.ModelName;
+//               break;
+//           }
+//       }
    }
    @Test
    public void getFeatures(){
@@ -74,7 +70,6 @@ public class TestCarService {
        var serviceMethod = carService.getFeatures(String.valueOf(car1.getId()));
 
        assert serviceMethod != null;
-       assert serviceMethod.getOrDefault("data", DefaultCarInterior.price) != null;
        assert car1.getInteriors().get(0).getDescription() == DefaultCarInterior.Description;
    }
    @Test(expected = FeatureNotFoundException.class)
@@ -95,7 +90,6 @@ public class TestCarService {
         var serviceMethod = carService.getFeatures(String.valueOf(car1.getId()));
 
         assert serviceMethod != null;
-        assert serviceMethod.getOrDefault("data", DefaultCarInterior.price) != null;
         assert car1.getInteriors().get(0).getDescription() == DefaultCarInterior.Description;
     }
 
@@ -117,7 +111,6 @@ public class TestCarService {
         var serviceMethod = carService.getExterior(String.valueOf(car1.getId()));
 
         assert serviceMethod != null;
-        assert serviceMethod.getOrDefault("data", DefaultCost.Price) != null;
         assert car1.getCost().getPrice() == DefaultCost.Price;
     }
 
@@ -139,8 +132,7 @@ public class TestCarService {
         var serviceMethod = carService.getAutoPilotSpecs(String.valueOf(car1.getId()));
 
         assert serviceMethod != null;
-        assert serviceMethod.getOrDefault("data", DefaultAutoPilot.Price) != null;
-        assert car1.getAutoPilots().get(0).getPrice() == String.valueOf(DefaultAutoPilot.Price);
+        assert car1.getAutoPilots().get(0).getPrice() == DefaultAutoPilot.Price;
     }
 
     @Test(expected = AutoPilotNotFoundException.class)

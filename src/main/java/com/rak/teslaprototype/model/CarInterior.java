@@ -18,6 +18,7 @@ public class CarInterior {
 
 
     private String description;
+    private String color;
     private Boolean option_included;
     private Integer price;
 
