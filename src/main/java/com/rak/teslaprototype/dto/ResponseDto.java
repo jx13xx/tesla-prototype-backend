@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class ResponseDto {
 
-    public Map<String, Object> convertToResponse (Object response){
-        Map<String, Object> cp = new HashMap<>();
-        cp.put("data", response);
-        return  cp;
+    public Object convertToResponse (Object response){
+//        Map<String, Object> cp = new HashMap<>();
+//        cp.put("data", response);
+        return  response;
     }
 }

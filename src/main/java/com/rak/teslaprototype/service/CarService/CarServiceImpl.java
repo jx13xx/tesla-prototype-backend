@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,29 +26,28 @@ public class CarServiceImpl implements CarServiceAPI {
     private CarRepository carRepository;
 
     @Override
-    public Map<String, Object> getAllCars() {
+    public Object getAllCars() {
         List<Car> cars = carRepository.findAll();
         return convertToDto(cars);
     }
 
     @SneakyThrows
     @Override
-    public Map<String, Object> getFeatures(String id) {
+    public Object getFeatures(String id) {
         List<Car> cars = carRepository.findAllById(Long.valueOf(id));
 
         if(cars.isEmpty())
            throw  new FeatureNotFoundException(ErrorMessage.CAR_NOT_FOUND);
 
-
        List<Feature> features = cars.stream().flatMap(
                car -> car.getFeatures().stream()).collect(Collectors.toList());
 
-        return convertToDto(responseModifier(Key.CAR_ID.key, id, "specs", features ));
+        return convertToDto(features);
     }
 
     @SneakyThrows
     @Override
-    public Map<String, Object> getInterior(String id) {
+    public Object getInterior(String id) {
         List<Car> cars = carRepository.findAllById(Long.valueOf(id));
 
         if(cars.isEmpty())
@@ -64,7 +62,7 @@ public class CarServiceImpl implements CarServiceAPI {
 
     @SneakyThrows
     @Override
-    public Map<String, Object> getExterior(String id) {
+    public Object getExterior(String id) {
         List<Car> cars = carRepository.findAllById(Long.valueOf(id));
 
         if(cars.isEmpty())
@@ -78,7 +76,7 @@ public class CarServiceImpl implements CarServiceAPI {
 
     @SneakyThrows
     @Override
-    public Map<String, Object> getAutoPilotSpecs(String id) {
+    public Object getAutoPilotSpecs(String id) {
         List<Car> cars = carRepository.findAllById(Long.valueOf(id));
 
         if(cars.isEmpty())
@@ -90,7 +88,7 @@ public class CarServiceImpl implements CarServiceAPI {
         return convertToDto(responseModifier(Key.CAR_ID.key, id, "autopilot_options", features ));
     }
 
-    private Map<String, Object> convertToDto (Object response){
+    private Object convertToDto (Object response){
         ResponseDto convertResponse = new ResponseDto();
         return convertResponse.convertToResponse(response);
     }

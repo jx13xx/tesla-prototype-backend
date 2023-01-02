@@ -10,7 +10,7 @@ public interface CarServiceAPI {
     /**
      * Get Specifications items such has speed, exterior specs of the car
      */
-    Map<String, Object> getAllCars();
+    Object getAllCars();
 
     /**
      * Get Car feature specifications items such has speed, exterior specs of the car
@@ -18,14 +18,14 @@ public interface CarServiceAPI {
      * @param id, refers to the unique identifier for the car
      */
 
-    Map<String, Object> getFeatures(String id);
+    Object getFeatures(String id);
 
     /**
      * Get Car interior specifications items such has color seat color
      *
      * @param id, refers to the unique identifier for the car
      */
-    Map<String, Object> getInterior(String id);
+    Object getInterior(String id);
 
 
     /**
@@ -33,14 +33,15 @@ public interface CarServiceAPI {
      *
      * @param id, refers to the unique identifier for the car
      */
-    Map<String, Object> getExterior(String id);
+    Object getExterior(String id);
 
     /**
      * Get Car autopilot specifications items such has self-driving or other features of the car
      *
      * @param id, refers to the unique identifier for the car
+     * @return
      */
-    Map<String, Object> getAutoPilotSpecs(String id);
+    Object getAutoPilotSpecs(String id);
 
 
 }
